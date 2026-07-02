@@ -1,0 +1,165 @@
+# ==========================================
+# PathLab Monorepo .gitignore
+# ==========================================
+
+# ==========================================
+# Backend (Spring Boot / Java / Maven)
+# ==========================================
+
+# Spring Boot
+app/pathlab-backend/HELP.md
+app/pathlab-backend/target/
+app/pathlab-backend/.mvn/wrapper/maven-wrapper.jar
+!app/pathlab-backend/**/src/main/**/target/
+!app/pathlab-backend/**/src/test/**/target/
+
+# Maven
+app/pathlab-backend/.mvn/
+app/pathlab-backend/mvnw
+app/pathlab-backend/mvnw.cmd
+
+# Spring Tool Suite (STS)
+app/pathlab-backend/.apt_generated
+app/pathlab-backend/.classpath
+app/pathlab-backend/.factorypath
+app/pathlab-backend/.project
+app/pathlab-backend/.settings
+app/pathlab-backend/.springBeans
+app/pathlab-backend/.sts4-cache
+
+# IntelliJ IDEA
+app/pathlab-backend/.idea
+app/pathlab-backend/*.iws
+app/pathlab-backend/*.iml
+app/pathlab-backend/*.ipr
+
+# NetBeans
+app/pathlab-backend/nbproject/private/
+app/pathlab-backend/nbbuild/
+app/pathlab-backend/dist/
+app/pathlab-backend/nbdist/
+app/pathlab-backend/.nb-gradle/
+app/pathlab-backend/build/
+!app/pathlab-backend/**/src/main/**/build/
+!app/pathlab-backend/**/src/test/**/build/
+
+# ==========================================
+# Frontend (React / Node / Vite)
+# ==========================================
+
+# Dependencies
+app/pathlab-frontend/node_modules/
+app/pathlab-frontend/.pnp
+app/pathlab-frontend/.pnp.js
+
+# Build outputs
+app/pathlab-frontend/dist/
+app/pathlab-frontend/dist-ssr/
+app/pathlab-frontend/build/
+
+# Logs
+app/pathlab-frontend/logs
+app/pathlab-frontend/*.log
+app/pathlab-frontend/npm-debug.log*
+app/pathlab-frontend/yarn-debug.log*
+app/pathlab-frontend/yarn-error.log*
+app/pathlab-frontend/pnpm-debug.log*
+app/pathlab-frontend/lerna-debug.log*
+
+# Environment variables
+app/pathlab-frontend/.env
+app/pathlab-frontend/.env.local
+app/pathlab-frontend/.env.development.local
+app/pathlab-frontend/.env.test.local
+app/pathlab-frontend/.env.production.local
+app/pathlab-frontend/*.local
+
+# Testing
+app/pathlab-frontend/coverage/
+app/pathlab-frontend/.nyc_output
+
+# ==========================================
+# Shared / General
+# ==========================================
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE and Editor Files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*~
+
+# Environment and Configuration
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# Temporary Files
+*.tmp
+*.temp
+*.cache
+.temp/
+.tmp/
+
+# Backup Files
+*.bak
+*.backup
+*~
+
+# Package Manager Lock Files (optional - uncomment if you want to ignore)
+# app/pathlab-frontend/package-lock.json
+# app/pathlab-frontend/yarn.lock
+# app/pathlab-frontend/pnpm-lock.yaml
+
+# ==========================================
+# Application Specific
+# ==========================================
+
+# Logs directory at root
+logs/
+*.log
+
+# Database files (if using local SQLite for testing)
+*.db
+*.sqlite
+*.sqlite3
+
+# Certificates and Keys
+*.crt
+*.cer
+*.p12
+*.pfx
+
+# Documentation builds
+docs/_build/
+site/
+
+# Cloud provider configs (if sensitive)
+# .aws/
+# .azure/
+# .gcloud/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# CI/CD
+.github/workflows/secrets.yml

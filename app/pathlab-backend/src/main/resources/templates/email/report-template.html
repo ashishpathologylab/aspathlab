@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Test Report</title>
+
+    <style>
+        /* A4 size in CSS: 210mm x 297mm */
+        @page {
+          size: A4;
+          margin: 18mm 14mm; /* adjust as you like */
+        }
+        body {
+          font-family: "Helvetica", "Arial", sans-serif;
+          font-size: 12px;
+          color: #111;
+          margin: 0;
+          -webkit-print-color-adjust: exact;
+        }
+
+        /* Each test occupies a full page */
+        .test-page {
+          box-sizing: border-box;
+          width: 100%;
+          height: calc(297mm - 36mm); /* page height minus vertical margins */
+          padding: 8mm;
+          page-break-after: always;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+        }
+
+        header.report-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 8mm;
+        }
+        .lab-info {
+          text-align: left;
+        }
+        .patient-info {
+          text-align: right;
+        }
+        h1 { margin: 0; font-size: 18px; }
+        .meta { font-size: 11px; color: #555; }
+
+        .test-title {
+          margin-bottom: 6mm;
+          border-bottom: 1px solid #ddd;
+          padding-bottom: 4px;
+        }
+
+        table.results {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 8mm;
+        }
+        table.results th, table.results td {
+          border: 1px solid #ddd;
+          padding: 6px 8px;
+          text-align: left;
+        }
+        table.results th {
+          background: #f0f0f0;
+          font-weight: 600;
+          font-size: 12px;
+        }
+
+        .footer {
+          margin-top: auto;
+          font-size: 11px;
+          display:flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        /* If last page: remove final page-break (not required but safe) */
+        .test-page:last-child { page-break-after: auto; }
+    </style>
+</head>
+<body>
+
+<!--
+  tests is a List<TestResultGroup>
+  TestResultGroup: testId, testName, parameters: List<ParameterResult>
+  patient: PatientInfo (id, name, age, gender)
+-->
+
+<!-- Lab header repeated per page -->
+<th:block th:each="test : ${tests}">
+    <div class="test-page">
+        <header class="report-header">
+            <div class="lab-info">
+                <h1>My Lab Name</h1>
+                <div class="meta">Address line 1 · Address line 2 · Phone: 123456789</div>
+            </div>
+            <div class="patient-info">
+                <div><strong th:text="${patient.name}">Patient Name</strong></div>
+                <div class="meta">
+                    Age: <span th:text="${patient.age}">30</span> |
+                    Gender: <span th:text="${patient.gender}">M</span><br/>
+                    Booking ID: <span th:text="${booking.id}">123</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="test-title">
+            <h2 th:text="${test.testName}">Test Name</h2>
+            <div class="meta">Test ID: <span th:text="${test.testId}">1</span></div>
+        </section>
+
+        <section class="result-table">
+            <table class="results">
+                <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                    <th>Unit</th>
+                    <th>Reference Range</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p : ${test.parameters}">
+                    <td th:text="${p.name}">Hemoglobin</td>
+                    <td th:text="${p.value}">13.5</td>
+                    <td th:text="${p.unit}">g/dL</td>
+                    <td>
+                        <span th:text="${p.refRangeMale}">13-17</span>
+                        <!-- you can customize which ref range to show based on gender -->
+                    </td>
+                    <td th:text="${p.status}">Normal</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="footer">
+            <div>
+                <div>Entered By: <span th:text="${booking.enteredBy}">Technician</span></div>
+                <div class="meta">Generated: <span th:text="${generatedAt}">2025-09-10T20:00</span></div>
+            </div>
+            <div>
+                <div>Signature</div>
+                <div style="margin-top:12px;">__________________</div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>
